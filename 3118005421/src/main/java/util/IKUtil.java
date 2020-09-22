@@ -1,5 +1,7 @@
 package util;
 
+
+
 import org.wltea.analyzer.core.IKSegmenter;
 import org.wltea.analyzer.core.Lexeme;
 
@@ -24,7 +26,6 @@ public class IKUtil {
                 word.put(lex.getLexemeText(),1);
             }
         }
-        System.out.println(word);
         return word;
     }
 
@@ -32,17 +33,17 @@ public class IKUtil {
     //接受两个句子，整理出一个词库
     public List<String> getPhrase(String str1,String str2){
         HashSet<String> phraseSet=new HashSet<String>();
+        StringBuilder stringBuilder=new StringBuilder();
+        stringBuilder.append(str1);
+        stringBuilder.append(str2);
         List<String> phrase=null;
         try {
-            HashMap<String,Integer> mapStr1=division(str1);
-            HashMap<String,Integer> mapStr2=division(str2);
-            mapStr1.forEach((key,value)->{phraseSet.add(key);});
-            mapStr2.forEach((key,value)->{phraseSet.add(key);});
+            HashMap<String,Integer> mapStr=division(stringBuilder.toString());
+            mapStr.forEach((key,value)->{phraseSet.add(key);});
             phrase= Arrays.asList(phraseSet.toArray(new String[0]));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(phrase);
         return phrase;
     }
 
