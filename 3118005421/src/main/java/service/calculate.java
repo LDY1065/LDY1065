@@ -1,7 +1,7 @@
 package service;
 
 import org.ujmp.core.Matrix;
-import util.IKUtil;
+import util.hanlpUtil;
 
 
 import java.io.IOException;
@@ -10,12 +10,12 @@ import java.util.List;
 
 public class calculate {
 
-    private IKUtil ikUtil=new IKUtil();
+    private hanlpUtil hanlpUtil=new hanlpUtil();
 
-    public  double calculation(String original,String copy) throws IOException {
-        List<String> phrase = ikUtil.getPhrase(original, copy);
-        HashMap<String,Integer> originalWords = ikUtil.division(original);
-        HashMap<String,Integer> copyWords = ikUtil.division(copy);
+    public double calculation(String original,String copy) throws IOException {
+        List<String> phrase = hanlpUtil.getPhrase(original, copy);
+        HashMap<String,Integer> originalWords = hanlpUtil.division(original);
+        HashMap<String,Integer> copyWords = hanlpUtil.division(copy);
         int line= phrase.size();
         Matrix originalMatrix=Matrix.Factory.zeros(1,line);
         Matrix copyMatrix=Matrix.Factory.zeros(1,line);
@@ -35,18 +35,11 @@ public class calculate {
             }
             i++;
         }
-        System.out.println(originalMatrix);
-        System.out.println(copyMatrix);
-        System.out.println(copyMatrix.transpose());
         int vectorProduct=originalMatrix.mtimes(copyMatrix.transpose()).getAsInt(0,0);
         double sum1=squareOriginalMatrix.getValueSum();
         double sum2=squareCopyMatrix.getValueSum();
-        System.out.println(vectorProduct);
-        System.out.println(sum1);
-        System.out.println(sum2);
         return vectorProduct/(Math.sqrt(sum1)*Math.sqrt(sum2));
     }
-
 
 
 
