@@ -6,6 +6,7 @@ import util.fileUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
@@ -82,7 +83,8 @@ public class application {
         try {
             //获取任务返回值
             Double result = taskFuture.get();
-            if(!fileUtil.writeAnswerToFile(String.format(result.toString(),"%.2f"),args[2])){
+            DecimalFormat df = new DecimalFormat("######0.00");
+            if(!fileUtil.writeAnswerToFile(df.format(result),args[2])){
                 System.out.println("输出文件路径有误");
                 return;
             }
