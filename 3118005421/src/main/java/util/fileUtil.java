@@ -16,7 +16,6 @@ public class fileUtil {
         if(fileName.indexOf(".txt")!=-1){
             String[] split = fileName.split("/");
             fileName=fileName.replace("/"+split[split.length-1],"");
-            System.out.println(fileName);
         }
         File answerDirectory=new File(fileName);
         if(!answerDirectory.exists()){
