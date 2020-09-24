@@ -14,6 +14,7 @@ public class articleUtil {
         while((temp=bufferedReader.readLine())!=null){
             stringBuilder.append(temp);
         }
+        //将标点符号替代，切割语句
         String[] sentences=stringBuilder.toString()
                 .replace(" ", "")
                 .replace("”","")

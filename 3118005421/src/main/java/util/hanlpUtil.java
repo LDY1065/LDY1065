@@ -13,7 +13,7 @@ import java.util.List;
 public class hanlpUtil {
 
 
-
+    //获取单个语句的词
     public HashMap<String,Integer> division(String sentence) throws IOException {
         List<Term> termList= StandardTokenizer.segment(sentence);
         HashMap<String,Integer> word=new HashMap<>();
@@ -30,6 +30,7 @@ public class hanlpUtil {
     }
 
 
+    //获取两个句子所有词（去重）
     public List<String> getPhrase(String str1,String str2){
         HashSet<String> phraseSet= new HashSet<>();
         StringBuilder stringBuilder=new StringBuilder();

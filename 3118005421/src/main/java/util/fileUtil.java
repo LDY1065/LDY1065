@@ -13,6 +13,7 @@ public class fileUtil {
 
     public static boolean writeAnswerToFile(String answer,String fileName) {
         File file=new File(fileName);
+        //判断文件路径是否以.txt结尾
         if(fileName.indexOf(".txt")!=-1){
             String[] split = fileName.split("/");
             fileName=fileName.replace("/"+split[split.length-1],"");

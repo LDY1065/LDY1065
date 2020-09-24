@@ -13,12 +13,12 @@ import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 
 public class application {
-
+    //子任务最大处理语句个数
     private static final Integer MAX = 5;
     private static articleUtil articleUtil=new articleUtil();
     private static calculate calculate=new calculate();
 
-
+    //静态内部类，fork/join框架
     static class myForkJoinTask extends RecursiveTask<Double> {
         private List<String> originalDivision;
         private List<String> copyDivision;
@@ -28,6 +28,7 @@ public class application {
             this.originalDivision=originalDivision;
         }
 
+        //计算方法
         @Override
         protected Double compute() {
             if(copyDivision.size()>=MAX){
@@ -74,9 +75,12 @@ public class application {
         }
         List<String> originalDivision = articleUtil.divisionArticle(original);
         List<String> copyDivision = articleUtil.divisionArticle(copy);
+        //开启线程池
         ForkJoinPool pool=new ForkJoinPool();
+        //提交任务
         ForkJoinTask<Double> taskFuture=pool.submit(new myForkJoinTask(originalDivision,copyDivision));
         try {
+            //获取任务返回值
             Double result = taskFuture.get();
             if(!fileUtil.writeAnswerToFile(String.format(result.toString(),"%.2f"),args[2])){
                 System.out.println("输出文件路径有误");

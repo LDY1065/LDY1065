@@ -12,15 +12,20 @@ public class calculate {
 
     private hanlpUtil hanlpUtil=new hanlpUtil();
 
+
+    //语句相似度计算
     public double calculation(String original,String copy) throws IOException {
         List<String> phrase = hanlpUtil.getPhrase(original, copy);
         HashMap<String,Integer> originalWords = hanlpUtil.division(original);
         HashMap<String,Integer> copyWords = hanlpUtil.division(copy);
         int line= phrase.size();
+        //这里是创建零向量
         Matrix originalMatrix=Matrix.Factory.zeros(1,line);
         Matrix copyMatrix=Matrix.Factory.zeros(1,line);
+        //计算向量模的矩阵
         Matrix squareOriginalMatrix=Matrix.Factory.zeros(1,line);
         Matrix squareCopyMatrix=Matrix.Factory.zeros(1,line);
+
         int i=0;
         for (String s : phrase) {
             if(originalWords.containsKey(s)){
